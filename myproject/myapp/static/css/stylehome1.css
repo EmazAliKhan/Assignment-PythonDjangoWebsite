@@ -1,0 +1,334 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+*{
+    margin: 0;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    border: none;
+    outline: none;
+    scroll-behavior: smooth;
+    font-family: 'Poppins',sans-serif;
+}
+:root{
+
+    --bg-color: #081b29;
+    --second-bg-color: #112e42;
+    --text-color:#ededed;
+    --main-color:#00abf0;
+    
+}
+
+html{
+    font-size: 62.5%;
+    overflow-x: hidden;
+}
+
+body{
+    background: var(--bg-color);
+    color: var(--text-color);
+}
+.header{
+    position: fixed;
+    top:0 ;
+    left:0;
+    width: 100%;
+    padding: 2rem 9%;
+    background-color: transparent;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+    transition: .3s;
+}
+
+.header.sticky{
+    background: var(--bg-color);
+}
+
+.logo{
+    position: relative;
+    font-size:2.5rem ;
+    color:var(--text-color) ;
+    font-weight: 600;
+}
+
+.navbar{
+    position: relative;
+}
+
+.navbar a{
+    font-size:1.7rem ;
+    color: var(--text-color);
+    font-weight: 500;
+    margin-left: 3.5rem;
+    transition: .3s;
+}
+
+.navbar a:hover,
+.navbar a.active{
+    color: var(--main-color);
+}
+
+#menu-icon{
+    position: relative;
+    font-size:3.6rem ;
+    color: var(--text-color);
+    cursor: pointer;
+    display: none;
+}
+
+section{
+    min-height:100vh ;
+    padding:10rem 9% 2rem ;
+}
+
+.home{
+    display:flex ;
+    align-items:center ;
+    padding:0 9% ;
+    background: url('../images/home.jpg')no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+.Home-content{
+    max-width: 60rem;
+    z-index: 99;
+}
+
+.Home-content h1{
+    position: relative;
+    display: inline-block;
+    font-size: 8rem;
+    font-weight: 700;
+    line-height: 1.3;
+}
+
+.Home-content h1 span{
+    color: var(--text-color);
+}
+
+.Home-content .text-animate{
+    position:relative ;
+    width:32.8rem ;
+}
+
+.Home-content .text-animate h3{
+    font-size:3.2rem ;
+    font-weight:700 ;
+    color: transparent;
+    -webkit-text-stroke: .7px var(--main-color);
+    background-image: linear-gradient(var(--main-color),  var(--main-color));
+    background-repeat: no-repeat;
+    -webkit-background-clip: text;
+    background-position: -33rem 0;
+}
+
+.home.show-animate .Home-content .text-animate h3{
+    animation: homeBgText 6s linear infinite;
+    animation-delay: 2s;
+}
+
+.Home-content .text-animate h3::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    border-right: 2px solid var(--main-color);
+    z-index: 1;
+}
+
+.home.show-animate .Home-content .text-animate h3::before{
+    animation: homeCursorText 6s linear infinite;
+    animation-delay: 2s;
+}
+
+/* animation reload and scroll */
+.animate{
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--bg-color);
+    z-index: 98;
+}
+
+.animate.home-img{
+    width: 50%;
+}
+
+.logo .animate,
+.navbar .animate,
+#menu-icon .animate,
+.home.show-animate .animate{
+    animation: showRight 1s ease forwards;
+    animation-delay: calc(.3s * var(--i));
+}
+
+.animate.scroll{
+    transition: 1s ease;
+    transition-delay: calc(.3s / var(--i));
+    animation: none;
+}
+
+
+
+/* BREAKPOINTS */
+@media (max-width: 1200px) {
+    html{
+        font-size: 55%;
+    }
+    
+}
+
+@media (max-width: 991px){
+    .header{
+        padding: 2rem 4%;
+    }
+
+    section{
+        padding: 10rem 4% 2rem;
+    }
+
+    .home{
+        padding: 0 4%;
+
+    }
+
+}
+
+
+
+@media (max-width: 768px){
+    .header{
+        background: var(--bg-color);
+    }
+
+    #menu-icon{
+        display: block;
+    }
+
+    .navbar{
+        position: absolute;
+        top: 100%;
+        left: -100%;
+        width: 100%;
+        padding: 1rem 4%;
+        background: var(--main-color);
+        box-shadow: 0 .5rem 1rem rgba(0, 0, 0 , .2);
+        z-index: 1;
+        transition: .25s ease;
+        transition-delay: .25s;
+    }
+
+    .navbar.active{
+        left: 0;
+        transition-delay: 0s;
+    }
+
+    .navbar .active-nav{
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: var(--bg-color);
+        border-top: .1rem solid rgba(0, 0, 0 , .2);
+        z-index: -1;
+        transition: .25s ease;
+        transition-delay: 0s;
+    }
+
+    .navbar.active .active-nav{
+        left: 0;
+        transition-delay: .25s;
+    }
+
+    .navbar a{
+        display: block;
+        font-size: 2rem;
+        margin: 3rem 0;
+        transform: translateX(-20rem);
+        transition: .25s ease;
+        transition-delay: 0s;
+    }
+
+    .navbar.active a{
+        transform: translateX(0);
+        transition-delay: .25s;
+    }
+
+}
+
+@media (max-width: 520px){
+    html{
+        font-size: 50%;
+    }
+
+    .Home-content h1{
+        display: flex;
+        flex-direction: column;
+    }
+
+   
+}
+
+@media (max-width: 462px){
+    .Home-content h1{
+        font-size: 5.2rem;
+    }
+
+}
+
+@media (max-width: 371px){
+    .home{
+        justify-content: center;
+    }
+
+    .Home-content{
+        display:flex ;
+        align-items: center;
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .Home-content h1{
+        font-size: 5rem;
+    }
+}
+
+/* keyframe animations */
+@keyframes homeBgText{
+    0%,
+    10%,
+    100%{
+        background-position: -33rem 0;
+    }
+    65%,
+    85%{
+        background-position: 0 0;
+    }
+}
+
+@keyframes homeCursorText{
+    0%,
+    10%,
+    100%{
+       width: 0;
+    }
+    65%,
+    78%,
+    85%{
+        width: 100%;
+        opacity: 1;
+    }
+
+    75%,
+    81%{
+        opacity: 0;
+    }
+}

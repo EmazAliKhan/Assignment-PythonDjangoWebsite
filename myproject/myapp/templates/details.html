@@ -1,0 +1,132 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product-Details</title>
+    <link rel="stylesheet" href="{% static 'css/stylehome1.css' %}">
+    <!-- box icons -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <style>
+
+      body{
+        background: url("{% static 'images/edit.jpg' %}")no-repeat   center center;
+        background-size: cover;
+        height: 100vh;
+        overflow: hidden;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }  
+
+
+.product-container {
+    position: relative; 
+    display: flex;
+    align-items: flex-start; 
+    justify-content: space-between;
+    padding: 20px;
+    margin: 20px auto;
+    max-width: 1200px;
+    background-color: rgba(255,255,255,0.13);
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    box-sizing: border-box;
+}
+
+
+.product-details {
+    flex: 2;
+    margin-right: 40px; 
+}
+
+.product-details h2 {
+    margin-top: 0;
+    font-size: 40px;
+    color: white;
+    margin-left: 60px;
+}
+
+.product-details p {
+    margin: 10px 0;
+    font-size: 16px;
+    color: white;
+    margin-left: 60px;
+}
+
+.product-details p strong {
+    color: white;
+}
+
+
+.product-image {
+    flex: 1;
+}
+
+.product-image img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+.back-button {
+    position: absolute;
+    bottom: 10px; 
+    right: 10px; 
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #ffffff;
+    background-color: #081b29;; 
+    border: none;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.back-button:hover {
+    background-color:#00abf0; 
+}
+    </style>
+    </head>
+</head>
+<body>
+    <!-- header bar -->
+    <header class="header">
+        <a href="#" class="logo">{{request.session.name}}.</a>
+        <div class="bx bx-menu" id="menu-icon"></div>
+        <nav class="navbar">
+            <a href="{% url 'home' %}">Home</a>
+            <a href="{% url 'add_category' %}">Add Category</a>
+            <a href="{% url 'createprod' %}">Add Product</a>
+            <a href="{% url 'list_categories' %}">Categories</a>
+            <a href="{% url 'showall' %}">Products</a>
+            <a href="{% url 'logout' %}">Logout</a>
+            <span class="active-nav"></span>
+        </nav> 
+    </header>
+   
+    <div class="product-container">
+       
+        <div class="product-image">
+            <img src="{{ product.imgurl }}" alt="{{ product.name }}">
+        </div>
+        
+        <div class="product-details">
+            <h2>{{ product.name }}</h2>
+            <p><strong>Brand:</strong> {{ product.brand }}</p>
+            <p><strong>Price:</strong> Rs.{{ product.price }}</p>
+            <p><strong>Quantity:</strong> {{ product.qty }}</p>
+            <p><strong>Description:</strong> {{ product.description }}</p>
+            <p><strong>Category:</strong> {{ product.category.name }}</p>
+            <p><strong>Created By:</strong> {{ product.user.name }}</p>
+            <p><strong>Created At:</strong> {{ product.created_at }}</p>
+        </div>
+        <a href="{% url 'showall' %}" class="back-button">Back to All Products</a>
+    </div>
+</body>
+</html>
